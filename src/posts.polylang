@@ -1,0 +1,9 @@
+collection Posts {
+	id: string;
+	creator: string;
+
+	function constructor(account: Accounts) {
+		this.id = "generate ksuid";
+		this.creator = account.auth(ctx.publicKey);
+	}
+}

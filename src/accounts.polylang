@@ -1,0 +1,24 @@
+collection Accounts {
+	id: string;
+	name: string;
+	publicKey: string;
+	username?: string;
+
+	function constructor(name: string, username?: string) {
+		this.id = "generate ksuid";
+		this.name = name;
+		this.publicKey = ctx.publicKey;
+
+		if (username) {
+			this.username = username;
+		}
+	}
+
+	function auth(publicKey: string): string {
+		if (this.publicKey == publicKey) {
+			return this.id;
+		} else {
+			throw error('invalid public key');
+		}
+	}
+}
