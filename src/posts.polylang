@@ -11,7 +11,11 @@ collection Posts {
 		this.attachments = attachments;
 	}
 
-	function update(content?: string, attachments?: string[]) {
+	function update(session: Sessions, content?: string, attachments?: string[]) {
+		if (session.auth() != this.creator) {
+			throw error('invalid post creator');
+		}
+
 		if (content) {
 			this.content = content;
 		}
