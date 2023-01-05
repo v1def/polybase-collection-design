@@ -2,8 +2,8 @@ collection Posts {
 	id: string;
 	creator: string;
 
-	function constructor(account: Accounts) {
+	function constructor(session: Sessions) {
 		this.id = "generate ksuid";
-		this.creator = account.auth(ctx.publicKey);
+		this.creator = session.auth();
 	}
 }

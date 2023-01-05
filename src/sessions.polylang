@@ -1,0 +1,22 @@
+collection Sessions {
+	id: string;
+	owner: string;
+
+	function constructor(account: Accounts, publicKey?: string) {
+		if (publicKey) {
+			this.id = publicKey;
+		} else {
+			this.id = ctx.publicKey;
+		}
+
+		this.owner = account.auth();
+	}
+
+	function auth(): string {
+		if (this.id == ctx.publicKey) {
+			return owner;
+		} else {
+			throw error('invalid public key');
+		}
+	}
+}

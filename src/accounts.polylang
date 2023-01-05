@@ -4,6 +4,8 @@ collection Accounts {
 	publicKey: string;
 	username?: string;
 
+	@index(publicKey, username);
+
 	function constructor(name: string, username?: string) {
 		this.id = "generate ksuid";
 		this.name = name;
@@ -14,8 +16,8 @@ collection Accounts {
 		}
 	}
 
-	function auth(publicKey: string): string {
-		if (this.publicKey == publicKey) {
+	function auth(): string {
+		if (this.publicKey == ctx.publicKey) {
 			return this.id;
 		} else {
 			throw error('invalid public key');
