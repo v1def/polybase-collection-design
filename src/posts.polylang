@@ -2,13 +2,22 @@ collection Posts {
 	id: string;
 	creator: string;
 	content: string;
-	attachments: string[];
+	attachments?: string[];
 
 	function constructor(session: Sessions, content: string, attachments: string[]) {
 		this.id = "generate ksuid";
 		this.creator = session.auth();
 		this.content = content;
 		this.attachments = attachments;
+	}
+
+	function update(content?: string, attachments?: string[]) {
+		if (content) {
+			this.content = content;
+		}
+		if (attachments) {
+			this.attachments = attachments;
+		}
 	}
 
 	function delete(session: Sessions) {
