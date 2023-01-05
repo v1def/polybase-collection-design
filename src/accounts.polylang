@@ -1,15 +1,15 @@
 collection Accounts {
 	id: string;
 	name: string;
-	publicKey: string;
+	masterKey: string;
 	username?: string;
 
-	@index(publicKey, username);
+	@index(masterKey, username);
 
 	function constructor(name: string, username?: string) {
 		this.id = "generate ksuid";
 		this.name = name;
-		this.publicKey = ctx.publicKey;
+		this.masterKey = ctx.publicKey;
 
 		if (username) {
 			this.username = username;
@@ -17,10 +17,10 @@ collection Accounts {
 	}
 
 	function auth(): string {
-		if (this.publicKey == ctx.publicKey) {
-			return this.id;
-		} else {
-			throw error('invalid public key');
+		if (this.masterKey != ctx.publicKey) {
+			throw error('invalid master key');
 		}
+
+		return this.id;
 	}
 }

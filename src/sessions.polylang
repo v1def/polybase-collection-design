@@ -13,10 +13,18 @@ collection Sessions {
 	}
 
 	function auth(): string {
-		if (this.id == ctx.publicKey) {
-			return owner;
-		} else {
+		if (this.id != ctx.publicKey) {
 			throw error('invalid public key');
 		}
+
+		return owner;
+	}
+
+	function delete(account: Accounts) {
+		if (this.id != ctx.publicKey) {
+			throw error('invalid public key');
+		}
+
+		selfdestruct();
 	}
 }

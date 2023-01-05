@@ -12,10 +12,10 @@
 ## Registration
 
 ```
-user = Users.constructor( ... )
+account = Accounts.constructor( ... )
 
-session = Sessions.constructor(user)
-	-> user.auth()
+session = Sessions.constructor(account)
+	-> account.auth()
 ```
 
 ## Create Post
