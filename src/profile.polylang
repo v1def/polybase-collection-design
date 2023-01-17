@@ -1,0 +1,24 @@
+collection Profile {
+	id: string;
+	bio?: string;
+	website?: string;
+
+	function constructor(session: Session, bio?: string; website?: string) {
+		this.id = session.auth();
+        
+		if (bio) {
+			this.bio = bio;
+		}
+		if (website) {
+			this.website = website;
+		}
+	}
+
+	function delete(session: Session) {
+		if (session.auth() != this.id) {
+			throw error('invalid profile owner');
+		}
+
+		selfdestruct();
+	}
+}
