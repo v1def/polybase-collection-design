@@ -8,21 +8,22 @@
 
 - [ ] Use UID instead of public key to assign owner or creator.
 - [ ] Add the ability to use multiple public keys for one account.
+- [ ] Setting the level of access to each session.
 
 ## Registration
 
 ```
-account = Accounts.constructor( ... )
+identity = Identity.constructor( ... )
 
-session = Sessions.constructor(account)
+session = Session.constructor(account)
 	-> account.auth()
 ```
 
 ## Create Post
 
 ```
-session = Sessions.record( ... )
+session = Session.record( ... )
 
-post = Posts.constructor(session, ... )
+post = Post.constructor(session, ... )
 	-> session.auth()
 ```

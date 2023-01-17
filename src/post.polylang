@@ -1,17 +1,20 @@
-collection Posts {
+collection Post {
 	id: string;
 	creator: string;
 	content: string;
 	attachments?: string[];
 
-	function constructor(session: Sessions, content: string, attachments: string[]) {
+	function constructor(session: Session, content: string, attachments?: string[]) {
 		this.id = "generate ksuid";
 		this.creator = session.auth();
 		this.content = content;
-		this.attachments = attachments;
+
+		if (attachments) {
+			this.attachments = attachments;
+		}
 	}
 
-	function update(session: Sessions, content?: string, attachments?: string[]) {
+	function update(session: Session, content?: string, attachments?: string[]) {
 		if (session.auth() != this.creator) {
 			throw error('invalid post creator');
 		}
@@ -24,7 +27,7 @@ collection Posts {
 		}
 	}
 
-	function delete(session: Sessions) {
+	function delete(session: Session) {
 		if (session.auth() != this.creator) {
 			throw error('invalid post creator');
 		}

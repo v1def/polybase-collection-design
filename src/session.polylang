@@ -1,15 +1,15 @@
-collection Sessions {
+collection Session {
 	id: string;
 	owner: string;
 
-	function constructor(account: Accounts, publicKey?: string) {
+	function constructor(identity: Identity, publicKey?: string) {
 		if (publicKey) {
 			this.id = publicKey;
 		} else {
 			this.id = ctx.publicKey;
 		}
 
-		this.owner = account.auth();
+		this.owner = identity.auth();
 	}
 
 	function auth(): string {
@@ -17,10 +17,10 @@ collection Sessions {
 			throw error('invalid public key');
 		}
 
-		return owner;
+		return this.owner;
 	}
 
-	function delete(account: Accounts) {
+	function delete() {
 		if (this.id != ctx.publicKey) {
 			throw error('invalid public key');
 		}
